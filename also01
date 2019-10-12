@@ -1,0 +1,195 @@
+<?php
+/*
+Template name: Главная
+*/
+?>
+<!DOCTYPE html>
+
+<!-- Last Published: Sat Oct 12 2019 19:03:17 GMT+0000 (UTC) -->
+<html data-wf-page="5d9c423459eb4780aad4972b" data-wf-site="5d9c423459eb471dbcd49727">
+
+<?php get_template_part("header_block", ""); ?>
+
+<body>
+  <div data-collapse="medium" data-animation="default" data-duration="400" class="navbar w-nav">
+    <div class="s1_nav_cont w-container">
+      <a href="/" class="brand w-inline-block w--current">
+        <img src="<?php bloginfo('template_url'); ?>/images/5d9c423459eb4774e5d49852_logo-light.png" height="67" alt="" class="logo" />
+      </a>
+      <nav role="navigation" class="nav-menu w-nav-menu"><?php if( $menu_items = wp_get_nav_menu_items('Главн меню') ) { $menu_list = ''; $current_class = '';
+foreach ( (array)$menu_items as $key => $menu_item ) {
+if($menu_item->url === get_home_url(null, $wp->request).'/'){$current_class = ' w--current';} else {$current_class = '';}
+if($menu_items[$key+1]->menu_item_parent != 0 && $menu_items[$key]->menu_item_parent == 0){
+  $menu_list .= '<div data-ix="" class="" ><div class=""><div>'.$menu_item->title.'</div><div class=""></div></div><nav class="">
+';
+}else{ if($menu_items[$key]->menu_item_parent == 0){$link_class = 'nav-link w-nav-link';}else{$link_class = '';}
+  $menu_list .= '<a class="'.$link_class.$current_class.'" title="'.$menu_item->attr_title.'" target="'.$menu_item->target.'" href="'.$menu_item->url.'">'.$menu_item->title.'</a>
+';
+  if($menu_items[$key+1]->menu_item_parent == 0 && $menu_items[$key]->menu_item_parent != 0){
+    $menu_list .= '</nav></div>';
+  }
+}
+} echo $menu_list; } ?></nav>
+      <div class="menu-button w-nav-button">
+        <div class="w-icon-nav-menu">
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php if( have_rows('sekcii') ){ ?><div><?php $loop_index = 0; while( have_rows('sekcii') ){ $loop_index++; the_row(); ?>
+
+    <?php if( get_row_layout() == 'slajder' && !get_sub_field('-')){ ?>
+<div id="top" class="s1">
+      <div data-delay="6000" data-animation="cross" data-autoplay="1" data-easing="ease-in-quad" data-duration="3000" data-infinite="1" class="slider w-slider">
+        <?php if( have_rows('slajdy') ){ ?><div class="w-slider-mask"><?php global $parent_id; $parent_id = $loop_id; $loop_index = 0; $loop_field = 'slajdy'; while( have_rows('slajdy') ){ global $loop_id; $loop_index++; $loop_id++; the_row(); ?>
+<div class="w-slide">
+            <div class="s1_slide_bg" data-ix="slide" style="background-image:url('<?php $field = get_sub_field('slajd'); if(isset($field['url'])){ echo($field['url']); }elseif(is_numeric($field)){ echo(wp_get_attachment_image_url($field, 'full')); }else{ echo($field); } ?>');">
+            </div>
+            <div class="s1_box">
+              <div class="s1_content">
+                <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="s1_image" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+                <h1 class="s1_title"><?= get_sub_field('zagolovok') ?></h1>
+                <img src="<?php $field = get_sub_field('kartinka_2'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="sep_white" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+                <p class="p_white"><?= get_sub_field('tekst') ?></p>
+                <a href="#shop" class="btn w-button">ОТВЕДАЙ ЧАШЕЧКУ</a>
+              </div>
+            </div>
+          </div>
+<?php } ?></div><?php } ?>
+        <div class="w-slider-arrow-left">
+          <div class="w-icon-slider-left">
+          </div>
+        </div>
+        <div class="w-slider-arrow-right">
+          <div class="icon w-icon-slider-right">
+          </div>
+        </div>
+        <div class="slide-nav w-slider-nav w-round">
+        </div>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'predlozhenie' && !get_sub_field('-')){ ?>
+<div id="about" class="s2">
+      <div class="cont">
+        <h1 class="h2"><?= get_sub_field('zagolovok') ?></h1>
+        <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="sep_brown" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+        <p class="desc"><?= get_sub_field('tekst') ?></p>
+        <?php if( have_rows('predlozhenie') ){ ?><div class="s2_row w-row"><?php global $parent_id; $parent_id = $loop_id; $loop_index = 0; $loop_field = 'predlozhenie'; while( have_rows('predlozhenie') ){ global $loop_id; $loop_index++; $loop_id++; the_row(); ?>
+<div class="s2_col w-col w-col-3">
+            <img src="<?php $field = get_sub_field('risunok'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" data-w-id="a5fb4095-8df9-0d9c-cffc-6d0c538f804a" style="opacity:0" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+            <h3 class="h3"><?= get_sub_field('zagolovok') ?></h3>
+            <p class="p"><?= get_sub_field('tekst') ?></p>
+          </div>
+<?php } ?></div><?php } ?>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'blog' && !get_sub_field('-')){ ?>
+<div id="blog" class="s3">
+      <div class="cont">
+        <h1 class="h2"><?= get_sub_field('zagolovok') ?></h1>
+        <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="sep_brown" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+        <p class="desc"><?= get_sub_field('tekst') ?></p>
+        <?php $query_args = select_query_by_name("Новости на главной"); $args['paged'] ? $query_args['paged'] = $args['paged'] : 0; $query = new WP_Query($query_args); if($query->have_posts()) : ?>
+<div class="s3_row w-row">
+<?php while($query->have_posts()) : $query->the_post(); ?>
+<div class="w-col w-col-4">
+            <div class="s3_box">
+              <a href="<?php the_permalink(); ?>" class="post_bg w-inline-block" style="background-image: url('<?php $img = wp_get_attachment_image_src(get_post_thumbnail_id(), "large"); echo $img[0]; ?>');"></a>
+              <h3 class="h3">
+                <a href="#" class="h3_link"><?php the_title(); ?></a>
+              </h3>
+              <div><?php the_excerpt(); ?></div>
+              <a href="<?php the_permalink(); ?>" class="post_link">— Читать далее</a>
+            </div>
+          </div>
+<?php endwhile; ?></div><?php else : ?><?php endif; unset($query_args); wp_reset_postdata(); ?>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'banner' && !get_sub_field('-')){ ?>
+<div class="s4" style="background-image:url('<?php $field = get_sub_field('fon'); if(isset($field['url'])){ echo($field['url']); }elseif(is_numeric($field)){ echo(wp_get_attachment_image_url($field, 'full')); }else{ echo($field); } ?>');">
+      <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'reklama' && !get_sub_field('-')){ ?>
+<div class="s5">
+      <div class="cont">
+        <?php if( have_rows('reklama') ){ ?><div class="w-row"><?php global $parent_id; $parent_id = $loop_id; $loop_index = 0; $loop_field = 'reklama'; while( have_rows('reklama') ){ global $loop_id; $loop_index++; $loop_id++; the_row(); ?>
+<div class="w-col w-col-3">
+            <div class="s5_box">
+              <div data-w-id="a5fb4095-8df9-0d9c-cffc-6d0c538f808e" style="opacity:0" class="s5_number"><?= get_sub_field('zagolovok') ?></div>
+              <h3 class="h3"><?= get_sub_field('opisanie') ?></h3>
+              <p class="p"><?= get_sub_field('tekst') ?></p>
+            </div>
+          </div>
+<?php } ?></div><?php } ?>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'magazin' && !get_sub_field('-')){ ?>
+<div id="shop" class="s6">
+      <div class="cont">
+        <h1 class="h2"><?= get_sub_field('zagolovok') ?></h1>
+        <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="sep_brown" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+        <p class="desc"><?= get_sub_field('tekst') ?></p>
+        <?php $query_args = select_query_by_name("Товары на главной"); $args['paged'] ? $query_args['paged'] = $args['paged'] : 0; $query = new WP_Query($query_args); if($query->have_posts()) : ?>
+<div class="s6-row">
+<?php while($query->have_posts()) : $query->the_post(); ?>
+<div class="s6_box">
+            <div class="product_bg" style="background-image: url('<?php $img = wp_get_attachment_image_src(get_post_thumbnail_id(), "large"); echo $img[0]; ?>');">
+              <a href="<?php the_permalink(); ?>" class="product_link w-inline-block">
+                <div class="btn add">подробнее</div>
+              </a>
+            </div>
+            <h3 class="h3">
+              <a href="#" class="h3_link"><?php the_title(); ?></a>
+            </h3>
+            <div class="price">
+              <span class="text-span"><?= get_field('cena') ?></span>Руб.</div>
+          </div>
+<?php endwhile; ?></div><?php else : ?><?php endif; unset($query_args); wp_reset_postdata(); ?>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'galereya' && !get_sub_field('-')){ ?>
+<div class="s7">
+      <div class="cont">
+        <h1 class="h2"><?= get_sub_field('zagolovok') ?></h1>
+        <img src="<?php $field = get_sub_field('kartinka'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="sep_brown" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+        <p class="desc"><?= get_sub_field('tekst') ?></p>
+        <div class="gallery"><?php $gallery = get_sub_field('galereya'); if(!empty($gallery)) { foreach($gallery as $item){ ?><a href="#" class="lightbox-link-2 w-inline-block w-lightbox">
+            <div class="gallery-1" style="background-image:url('<?= $item["url"] ?>');">
+            </div>
+          <script class="w-json" type="application/json">{ "group": "''", "items": [{ "url": "<?= $item["url"] ?>", "fileName": "", "origFileName": "", "width": 1920, "height": 1100, "size": 1, "type": "image" }] }</script></a><?php }} ?></div>
+      </div>
+    </div>
+<?php } ?>
+    <?php if( get_row_layout() == 'brendy' && !get_sub_field('-')){ ?>
+<div class="s5">
+      <div class="cont">
+        <?php if( have_rows('brendy') ){ ?><div class="w-row"><?php global $parent_id; $parent_id = $loop_id; $loop_index = 0; $loop_field = 'brendy'; while( have_rows('brendy') ){ global $loop_id; $loop_index++; $loop_id++; the_row(); ?>
+<div class="w-col w-col-2 w-col-medium-4 w-col-small-6">
+            <img src="<?php $field = get_sub_field('risunok'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+          </div>
+<?php } ?></div><?php } ?>
+      </div>
+    </div>
+<?php } ?>
+  
+<?php } ?></div><?php } ?>
+  <div id="footer" class="footer">
+    <div class="cont">
+      <img src="<?php $field = get_field('logo_v_podvale', 'option'); if(isset($field['url'])){ echo($field['url']); }else{ echo($field); } ?>" data-w-id="2612fa18-070f-3941-f25d-82580807fe4b" alt="<?php if(isset($field['alt'])){ echo($field['alt']); } ?>" class="footer_logo" title="<?php if(isset($field['title'])){ echo($field['title']); } ?>" />
+      <p class="p_white"><?= get_field('tekst_v_podvale', 'option') ?></p>
+      <h3 class="h3 on_footer"><?= get_field('zagolovok_v_podvale', 'option') ?></h3>
+      <?php if( have_rows('adresa_v_podvale', 'option') ){ ?><div><?php global $parent_id; $parent_id = $loop_id; $loop_index = 0; $loop_field = 'adresa_v_podvale'; while( have_rows('adresa_v_podvale', 'option') ){ global $loop_id; $loop_index++; $loop_id++; the_row(); ?>
+<p class="p_white"><?= get_sub_field('adres_v_podvale') ?></p>
+<?php } ?></div><?php } ?>
+    </div>
+  </div>
+  
+  
+  <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  <?php get_template_part("footer_block", ""); ?>
